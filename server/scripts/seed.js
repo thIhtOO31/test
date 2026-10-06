@@ -18,7 +18,6 @@ async function seedDatabase() {
     const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`Connected to: ${conn.connection.host} (${conn.connection.name})`);
 
-    // Clean existing collections
     console.log("Cleaning existing collections...");
     await Promise.all([
       User.deleteMany({}),
@@ -28,7 +27,6 @@ async function seedDatabase() {
       Record.deleteMany({}),
     ]);
 
-    // 1. Seed Users (Advisor and Students)
     console.log("Seeding Users...");
     const defaultPasswordHash = await bcrypt.hash("Password123!", 10);
 
